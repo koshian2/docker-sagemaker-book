@@ -1,0 +1,17 @@
+FROM nvidia/cuda:11.6.1-cudnn8-devel-ubuntu20.04
+
+RUN apt-get update
+# 環境変数はexport→ENV
+ENV TZ=Asia/Tokyo
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN apt-get install -yq --no-install-recommends python3-pip \
+        python3-dev \
+        vim \
+        wget \
+        git  \
+        tzdata
+RUN apt-get upgrade -y
+
+RUN ln -s /usr/bin/python3 /usr/bin/python
+RUN pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116
+RUN pip install pytorch-lightning matplotlib

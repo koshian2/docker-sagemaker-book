@@ -1,0 +1,8 @@
+FROM ubuntu:22.04
+
+RUN apt-get update
+RUN apt-get -yq install --no-install-recommends python3-pip \
+        python3-dev \
+        vim 
+# Pythonで実行できるようにシンボリックの作成
+RUN ln -s /usr/bin/python3 /usr/bin/python
